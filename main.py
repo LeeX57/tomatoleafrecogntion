@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 #MODEL = tf.keras.models.load_model("./MLModel")
-MODEL = tf.keras.layers.TFSavedModelLayer("./MLModel", call_endpoint='serving_default')
+#MODEL = tf.keras.layers.TFSavedModelLayer("./MLModel", call_endpoint='serving_default')
 
 
 
@@ -58,19 +58,19 @@ def read_file_as_image(data) -> np.ndarray:
     image = np.array(Image.open(BytesIO(data)))
     return image
 
-@app.post("/predict")
-async def predict(
-    file: UploadFile = File(...)
-):
-    image = read_file_as_image(await file.read())
-    img_batch = np.expand_dims(image, 0)
+# @app.post("/predict")
+# async def predict(
+#     file: UploadFile = File(...)
+# ):
+#     image = read_file_as_image(await file.read())
+#     img_batch = np.expand_dims(image, 0)
     
-    predictions = MODEL.predict(img_batch)
+#     predictions = MODEL.predict(img_batch)
 
-    predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
-    confidence = np.max(predictions[0])
-    return {
-        'class': predicted_class,
-        'confidence': float(confidence)
-    }
+#     predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
+#     confidence = np.max(predictions[0])
+#     return {
+#         'class': predicted_class,
+#         'confidence': float(confidence)
+#     }
 
