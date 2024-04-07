@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL = tf.keras.models.load_model("./MLModel")
+# MODEL = tf.keras.models.load_model("./MLModel")
 MODEL = TFSMLayer("./MLModel", call_endpoint='serving_default')
 
 
