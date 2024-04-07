@@ -3,4 +3,3 @@ uvicorn[standard]
 numpy
 Pillow[bmp]
 tensorflow-cpu
-guvicorn[standard]
