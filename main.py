@@ -22,7 +22,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL = tf.keras.models.load_model("./MLModel")
+# MODEL = tf.keras.models.load_model("./MLModel")
+
+
+# Load the SavedModel as a Keras layer
+layer = tf.keras.layers.TFSavedModel("./MLModel", call_endpoint='serving_default')
+
+# Create a new model that uses the loaded layer
+model = tf.keras.Sequential([
+    layer,
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+# Compile the model for inference
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
 
