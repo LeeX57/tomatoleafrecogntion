@@ -2,4 +2,4 @@ fastapi[all]
 uvicorn[standard]
 numpy
 Pillow[bmp]
-tensorflow
+tensorflow-cpu
