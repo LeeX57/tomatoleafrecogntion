@@ -23,7 +23,6 @@ app.add_middleware(
 )
 
 MODEL = tf.keras.models.load_model("./MLModel")
-#MODEL = tf.keras.layers.TFSavedModelLayer("./MLModel", call_endpoint='serving_default')
 
 
 
