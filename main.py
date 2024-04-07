@@ -5,6 +5,8 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 import tensorflow as tf
+from keras.layers import TFSMLayer
+
 
 app = FastAPI()
 
@@ -23,7 +25,7 @@ app.add_middleware(
 )
 
 MODEL = tf.keras.models.load_model("./MLModel")
-
+MODEL = TFSMLayer("./MLModel", call_endpoint='serving_default')
 
 
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
