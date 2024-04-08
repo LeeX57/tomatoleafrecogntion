@@ -25,15 +25,6 @@ app.add_middleware(
 )
 
 # MODEL = tf.keras.models.load_model("./MLModel")
-#MODEL = TFSMLayer("./MLModel", call_endpoint='serving_default')
-
-# Load the TensorFlow Lite model
-interpreter = tf.lite.Interpreter(model_path="./imageRecognitionModel.tflite")
-interpreter.allocate_tensors()
-
-# Save the loaded model into the MODEL variable
-MODEL = interpreter
-
 
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
 
