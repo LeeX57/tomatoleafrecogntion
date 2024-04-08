@@ -44,8 +44,9 @@ async def predict(
 ):
     image = read_file_as_image(await file.read())
     img_batch = np.expand_dims(image, 0)
-    
-    predictions = MODEL.predict(img_batch)
+
+    # Set the reduction method to 'none' explicitly
+    predictions = MODEL.predict(img_batch, reduction="none")
 
     predicted_class_index = np.argmax(predictions[0])
     predicted_class = CLASS_NAMES[predicted_class_index]
