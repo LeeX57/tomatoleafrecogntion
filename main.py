@@ -24,8 +24,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# MODEL = tf.keras.models.load_model("./MLModel")
-MODEL = TFSMLayer("./MLModel", call_endpoint='serving_default')
+MODEL = tf.keras.models.load_model("./MLModel")
+#MODEL = TFSMLayer("./MLModel", call_endpoint='serving_default')
 
 
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
