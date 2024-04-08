@@ -8,12 +8,9 @@ import tensorflow as tf
 
 app = FastAPI()
 
-MODEL = tf.keras.models.load_model("./imageRecognitionModel.tflite")
+MODEL = tf.keras.models.load_model("./MlModel")
 
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
-
-
-
 
 
 # GET REQ
@@ -56,4 +53,3 @@ async def predict(
         'class': predicted_class,
         'confidence': float(confidence)
     }
-
