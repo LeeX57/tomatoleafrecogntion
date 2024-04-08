@@ -13,9 +13,6 @@ MODEL = tf.keras.models.load_model("./leafRecogModel.h5")
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
 
 
-# Define the loss function with explicit reduction
-loss_function = tf.keras.losses.sparse_categorical_crossentropy
-reduction = tf.keras.losses.Reduction.NONE
 
 
 
@@ -48,18 +45,15 @@ def read_file_as_image(data) -> np.ndarray:
 async def predict(
     file: UploadFile = File(...)
 ):
-    try:
-        image = read_file_as_image(await file.read())
-        img_batch = np.expand_dims(image, 0)
-        
-        predictions = MODEL.predict(img_batch)
+    image = read_file_as_image(await file.read())
+    img_batch = np.expand_dims(image, 0)
+    
+    predictions = MODEL.predict(img_batch)
 
-        predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
-        confidence = np.max(predictions[0])
-        return {
-            'class': predicted_class,
-            'confidence': float(confidence)
-        }
-    except Exception as e:
-        return {"error": str(e)}
+    predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
+    confidence = np.max(predictions[0])
+    return {
+        'class': predicted_class,
+        'confidence': float(confidence)
+    }
 
