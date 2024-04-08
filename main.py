@@ -42,18 +42,18 @@ def read_file_as_image(data) -> np.ndarray:
 async def predict(
     file: UploadFile = File(...)
 ):
-    image = read_file_as_image(await file.read())
-    img_batch = np.expand_dims(image, 0)
+    try:
+        image = read_file_as_image(await file.read())
+        img_batch = np.expand_dims(image, 0)
+        
+        predictions = MODEL.predict(img_batch)
 
-    # Set the reduction method to 'none' explicitly
-    predictions = MODEL.predict(img_batch, reduction="none")
-
-    predicted_class_index = np.argmax(predictions[0])
-    predicted_class = CLASS_NAMES[predicted_class_index]
-    confidence = float(predictions[0][predicted_class_index])
-
-    return {
-        'class': predicted_class,
-        'confidence': confidence
-    }
+        predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
+        confidence = np.max(predictions[0])
+        return {
+            'class': predicted_class,
+            'confidence': float(confidence)
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
