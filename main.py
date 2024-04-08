@@ -13,6 +13,12 @@ MODEL = tf.keras.models.load_model("./leafRecogModel.h5")
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
 
 
+# Define the loss function with explicit reduction
+loss_function = tf.keras.losses.sparse_categorical_crossentropy
+reduction = tf.keras.losses.Reduction.NONE
+
+
+
 # GET REQ
 # ==================================
 
