@@ -5,8 +5,6 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 import tensorflow as tf
-from keras.layers import TFSMLayer
-
 
 app = FastAPI()
 
@@ -24,12 +22,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# MODEL = tf.keras.models.load_model("./leafRecogModel.h5")
+MODEL = tf.keras.models.load_model("./leafRecogModel.h5")
 
 CLASS_NAMES = ["Tomato_Bacterial_spot", "Tomato__Tomato_mosaic_virus" , "Tomato_healthy"]
-
-
-
 
 
 # GET REQ
@@ -73,3 +68,5 @@ async def predict(
         'confidence': float(confidence)
     }
 
+# if __name__ == "__main__":
+#     uvicorn.run(app, host='localhost', port=8000)
